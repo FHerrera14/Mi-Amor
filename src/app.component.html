@@ -1,0 +1,67 @@
+<div class="relative w-screen h-screen overflow-hidden flex items-center justify-center transition-colors duration-1000"
+     [class]="stage() === 'initial' ? 'bg-gradient-to-b from-sky-400 to-amber-200' : 'bg-gradient-to-b from-gray-900 via-indigo-900 to-black'">
+
+  @if (stage() === 'initial') {
+    <button (click)="startAnimation()" class="relative group" [disabled]="isLoading()">
+      <div class="absolute -inset-0.5 bg-red-500 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" [class.animate-pulse]="!isLoading()"></div>
+      <div class="relative w-48 h-48 bg-red-600 rounded-full flex items-center justify-center shadow-2xl transition-transform transform group-hover:scale-110 duration-300">
+        @if (isLoading()) {
+           <svg class="animate-spin h-16 w-16 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        } @else {
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+          </svg>
+        }
+      </div>
+    </button>
+  }
+
+  @if (stage() !== 'initial') {
+     <div class="absolute inset-0 z-0">
+      @for(star of stars(); track $index) {
+        <div class="star" [style.top]="star.top" [style.left]="star.left" [style.width]="star.width" [style.height]="star.height" [style.animation-delay]="star.animationDelay"></div>
+      }
+    </div>
+  }
+
+  @if (stage() === 'fireworks') {
+    <div class="absolute inset-0 z-10">
+      @for(firework of displayedFireworks(); track firework.id) {
+        <div class="firework-container" [style.left.%]="firework.x" [style.top.%]="firework.y">
+           <div class="particle-container">
+              @for(particle of firework.particles; track $index) {
+                <div class="particle" [style]="particle.style"></div>
+              }
+           </div>
+           <p class="firework-text">{{ firework.text }}</p>
+        </div>
+      }
+    </div>
+  }
+
+  @if (stage() === 'final') {
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 sm:p-8 transition-opacity duration-1000 z-10" [style.opacity]="finalTextOpacity()">
+      <div class="bg-white/10 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-xl w-full max-w-2xl text-white">
+        
+        <h1 class="text-3xl sm:text-4xl font-bold mb-2 text-pink-300" style="text-shadow: 0 0 15px #ff7ac6;">
+          Feliz Aniversario mi amor
+        </h1>
+
+        <p class="text-2xl sm:text-3xl leading-relaxed my-4 text-cyan-300" style="text-shadow: 0 0 15px #00e5ff;">
+          3 años juntos
+        </p>
+        
+        <div class="flex justify-center items-center mt-6 h-28 sm:h-40">
+           <p class="font-cursive text-7xl sm:text-8xl text-white" style="text-shadow: 0 0 15px #ff7ac6, 0 0 25px #ff7ac6;">
+             Te amo
+           </p>
+        </div>
+
+      </div>
+    </div>
+  }
+
+</div>

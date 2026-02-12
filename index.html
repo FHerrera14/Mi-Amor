@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story Tree</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: 'Georgia', serif;
+    }
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    .font-cursive {
+      font-family: 'Great Vibes', cursive;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+      animation: twinkle 4s infinite ease-in-out;
+    }
+
+    @keyframes text-glow {
+      0%, 100% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff7ac6, 0 0 30px #ff7ac6;
+      }
+      50% {
+        text-shadow: 0 0 20px #fff, 0 0 30px #f09, 0 0 40px #f09;
+      }
+    }
+
+    @keyframes fade-in-out-glow {
+      0% { opacity: 0; transform: scale(0.8); }
+      20%, 80% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.8); }
+    }
+    
+    .firework-container {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(-50%, -50%);
+    }
+
+    .particle-container {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      animation: fade-in-out-glow 1.5s 0.2s ease-out forwards;
+    }
+    
+    .particle {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      animation: particle-explode 1.7s ease-out forwards;
+    }
+
+    @keyframes particle-explode {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: var(--transform-end) scale(0);
+        opacity: 0;
+      }
+    }
+
+    .firework-text {
+      color: white;
+      font-size: 1.75rem;
+      text-align: center;
+      width: 300px;
+      animation: fade-in-out-glow 4s ease-in-out forwards, text-glow 2s infinite alternate;
+      z-index: 10;
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "rxjs": "https://esm.sh/rxjs@^7.8.2?conditions=es2015",
+    "rxjs/operators": "https://esm.sh/rxjs@^7.8.2/operators?conditions=es2015",
+    "rxjs/ajax": "https://esm.sh/rxjs@^7.8.2/ajax?conditions=es2015",
+    "rxjs/webSocket": "https://esm.sh/rxjs@^7.8.2/webSocket?conditions=es2015",
+    "rxjs/testing": "https://esm.sh/rxjs@^7.8.2/testing?conditions=es2015",
+    "rxjs/fetch": "https://esm.sh/rxjs@^7.8.2/fetch?conditions=es2015",
+    "@google/genai": "https://esm.sh/@google/genai?conditions=es2015",
+    "@angular/compiler": "https://esm.sh/@angular/compiler@^21.1.4?external=rxjs",
+    "@angular/platform-browser": "https://esm.sh/@angular/platform-browser@^21.1.4?external=rxjs",
+    "@angular/core": "https://esm.sh/@angular/core@^21.1.4?external=rxjs",
+    "@angular/common": "https://esm.sh/@angular/common@^21.1.4?external=rxjs"
+  }
+}
+</script>
+</head>
+<body class="bg-pink-100">
+  <app-root></app-root>
+</body>
+</html>
